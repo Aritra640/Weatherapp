@@ -2,6 +2,7 @@ import { airAtom } from "@/store/atoms/theme";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { CrossIcon } from "../CrossIcon";
 
+
 export function AirModal() {
   const air = useRecoilValue(airAtom);
   const setAir = useSetRecoilState(airAtom);
@@ -13,7 +14,7 @@ export function AirModal() {
   return (
     air && (
       <div className = "flex justify-center">
-      <div className="bg-slate-600 text-black fixed mt-28 w-120 rounded-xl">
+      <div className="bg-gray-600 text-black fixed mt-28 w-120 rounded-xl">
         <div className="p-3">
         <div className="flex justify-end">
           <button className="slate-600 text-black cursor-pointer" onClick={toggleModal}>

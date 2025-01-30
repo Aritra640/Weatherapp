@@ -1,12 +1,14 @@
 import { useRecoilValue } from "recoil";
-import { themeAtom } from "../store/atoms/theme";
+import { themeAtom} from "../store/atoms/theme";
 import { IconButton } from "@/Components/Buttons";
-import { Sunny } from "@/Components/Sunny";
 import { SearchButton } from "@/Components/SearchButton";
 import { AirButton } from "@/Components/AirButton";
 import { AirModal } from "@/Components/Modals/AirModal";
 import { SearchModal } from "@/Components/Modals/SarchModal";
 import { ForcastTab } from "@/Components/ForcastComponents/ForcastTab";
+import { useCurWeather } from "@/hooks/useCurWeather";
+import { useWeatherImage } from "@/hooks/useWeatherImage";
+import { useAirPollution } from "@/hooks/useAirPollution";
 
 const Themes = {
   Dark: "bg-slate-900  text-white",
@@ -17,6 +19,11 @@ export function Weather() {
   const theme = useRecoilValue(themeAtom);
   const commonStyle = Themes[theme] + " " + "h-screen w-screen fixed";
 
+  
+
+  const weatherToday = useCurWeather();
+  const airPollution = useAirPollution();
+
   return (
     <div className={commonStyle}>
       <AirModal />
@@ -24,12 +31,12 @@ export function Weather() {
       <div className="flex justify-between">
         <div>
         <div className="text-5xl pl-4 pt-3">
-          New York
+          {weatherToday.Location}
         </div>
         <div className="text-xl pl-4 pt-1 flex justify-start gap-2">
-            <div>lat: 1.333</div>
+            <div>lat: {weatherToday.Latitude}</div>
             <div>
-                long: 2.333
+                long: {weatherToday.Longitude}
             </div>
         </div>
         </div>
@@ -40,15 +47,15 @@ export function Weather() {
       </div>
 
       <div className="flex justify-center max-h-48 ">
-        <Sunny />{" "}
-        <span className="pl-6">
+        {useWeatherImage()}{" "}
+        <span className="pl-6 pt-5">
           <div className="flex justify-start gap-4">
-            <div className="text-7xl">24&deg;C</div>
-            <div className="text-4xl pt-6">feels like 32&deg;C</div>
+            <div className="text-7xl">{weatherToday.temperature}&deg;C</div>
+            <div className="text-4xl pt-6">feels like {weatherToday.feelsLike}&deg;C</div>
           </div>
-          <div className="text-2xl pt-1">Sunny</div>
-          <div className="text-2xl pt-1">wind speed: 4.09</div>
-          <div className="text-2xl pt-1">ait quality: Fair <AirButton /></div>
+          <div className="text-2xl pt-1">{weatherToday.weatherDesc}</div>
+          <div className="text-2xl pt-1">wind speed: {weatherToday.windSpeed}</div>
+          <div className="text-2xl pt-1">ait quality: {airPollution} <AirButton /></div>
         </span>
       </div>
 

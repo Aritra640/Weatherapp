@@ -1,4 +1,5 @@
 import { searchAtom, themeAtom } from "@/store/atoms/theme"
+import { useRef } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 const SearchThemes = {
@@ -12,6 +13,8 @@ export function SearchModal() {
   const search = useRecoilValue(searchAtom);
   const setSearch = useSetRecoilState(searchAtom);
 
+  const cityRef = useRef<HTMLInputElement>(null);
+
   function toggleSearch() {
     setSearch(false);
   }
@@ -19,6 +22,7 @@ export function SearchModal() {
   function EnterFunction(event : React.KeyboardEvent<HTMLInputElement>) {
     if(event.key == 'Enter') {
       //Send request 
+      const city = cityRef.current?.value;
 
       toggleSearch();
     }
@@ -30,7 +34,7 @@ export function SearchModal() {
   return(search && <div className="h-screen w-screen fixed flex justify-center">
     <span className = {SearchThemes[theme] + " " + "max-h-96 rounded-2xl min-w-120 max-w-120 mt-2"}>
       <div className="flex justify-center">
-        <input className = "bg-white text-black rounded-2xl mt-2 min-w-110 max-w-110 h-10 text-center" placeholder="Enter city name here (Press escape to cancel , enter to select)" type="text" onKeyUp={EnterFunction} /> 
+        <input className = "bg-white text-black rounded-2xl mt-2 min-w-110 max-w-110 h-10 text-center" placeholder="Enter city name here (Press escape to cancel , enter to select)" type="text" onKeyUp={EnterFunction} ref={cityRef} /> 
       </div>
 
       <br />
