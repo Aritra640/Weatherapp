@@ -1,5 +1,6 @@
 import { IIcon } from "@/Icons/IIcon";
-import { airAtom, themeAtom } from "@/store/atoms/theme"
+import { airAtom } from "@/store/atoms/airAtom";
+import { themeAtom } from "@/store/atoms/theme"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 const Airthemes = {

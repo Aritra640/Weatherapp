@@ -1,4 +1,5 @@
-import { locationAtom, weatherTodayAtom } from "@/store/atoms/theme";
+import { locationAtom } from "@/store/atoms/locationAtom";
+import { weatherTodayAtom } from "@/store/atoms/weatherTodayAtom";
 import axios from "axios";
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -22,11 +23,11 @@ export function useCurWeather() {
         feelsLike: response.data.main.feels_like,
         windSpeed: response.data.wind.speed,
 
-        weatherDesc: response.data.weather.description,
-        weatherCode: response.data.weather.id
+        weatherDesc: response.data.weather[0].description,
+        weatherCode: response.data.weather[0].id
       })
     })
-  } , []);
+  } , [url]);
 
   console.log("curLocation called!")
   console.log(curLocation)

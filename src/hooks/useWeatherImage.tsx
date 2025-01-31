@@ -6,7 +6,7 @@ import { Snow } from "@/Components/snow";
 import { Sunny } from "@/Components/Sunny";
 import { Thunderstorm } from "@/Components/thunderstorm";
 import { Typhoon } from "@/Components/Typhoon";
-import { weatherTodayAtom } from "@/store/atoms/theme";
+import { weatherTodayAtom } from "@/store/atoms/weatherTodayAtom";
 import { useRecoilValue } from "recoil";
 
 // 200-232.Thunderstorm

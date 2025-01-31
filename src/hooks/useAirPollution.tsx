@@ -1,4 +1,4 @@
-import { weatherTodayAtom } from "@/store/atoms/theme";
+import { weatherTodayAtom } from "@/store/atoms/weatherTodayAtom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";

@@ -1,5 +1,6 @@
 import { Search } from "@/Icons/SearchIcon";
-import { searchAtom, themeAtom } from "@/store/atoms/theme"
+import { searchAtom } from "@/store/atoms/searchAtom";
+import { themeAtom } from "@/store/atoms/theme"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 const searchStyles = {

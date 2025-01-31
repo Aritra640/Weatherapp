@@ -1,5 +1,8 @@
-import { searchAtom, themeAtom } from "@/store/atoms/theme"
-import { useRef } from "react";
+import { locationAtom } from "@/store/atoms/locationAtom";
+import { searchAtom } from "@/store/atoms/searchAtom";
+import { themeAtom } from "@/store/atoms/theme"
+import axios from "axios";
+import { useRef, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil"
 
 const SearchThemes = {
@@ -12,6 +15,8 @@ export function SearchModal() {
   const theme = useRecoilValue(themeAtom);
   const search = useRecoilValue(searchAtom);
   const setSearch = useSetRecoilState(searchAtom);
+  const setLocation = useSetRecoilState(locationAtom);
+
 
   const cityRef = useRef<HTMLInputElement>(null);
 
@@ -19,11 +24,41 @@ export function SearchModal() {
     setSearch(false);
   }
 
+  const [flag , setFlag] = useState<true|false>();
+
+  function searchCity(city: string) {
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`; 
+
+    
+
+    axios.get(url).then((response)=>{
+      if(response.status >= 200 && response.status < 300) {
+        setFlag(true);
+      }else{
+        setFlag(false);
+      }
+    })
+  } 
+
   function EnterFunction(event : React.KeyboardEvent<HTMLInputElement>) {
+
+    const city = cityRef.current?.value??"";
+    if(!city) {
+      alert("city name invalid!");
+      toggleSearch();
+    }
+
+    searchCity(city);
+
     if(event.key == 'Enter') {
       //Send request 
-      const city = cityRef.current?.value;
-
+      if(flag == true) {
+        setLocation(city);
+      }
+      else{
+        alert("city name invalid!");
+      }
       toggleSearch();
     }
     else if(event.key == 'Escape') {

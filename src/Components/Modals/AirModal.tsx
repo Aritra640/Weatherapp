@@ -1,7 +1,6 @@
-import { airAtom } from "@/store/atoms/theme";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { CrossIcon } from "../CrossIcon";
-
+import { airAtom } from "@/store/atoms/airAtom";
 
 export function AirModal() {
   const air = useRecoilValue(airAtom);

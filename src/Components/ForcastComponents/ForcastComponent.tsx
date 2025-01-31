@@ -1,6 +1,7 @@
-import { forcastModalAtom, themeAtom } from "@/store/atoms/theme"
+import { forecastAtom } from "@/store/atoms/forecastatom"
+import { themeAtom } from "@/store/atoms/theme"
 import { ReactElement } from "react"
-import { useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState  } from "recoil"
 
 interface ForcastComponentProps {
   WeatherImage? : ReactElement
@@ -19,14 +20,16 @@ const HoverThemes = {
   "Bright" : "hover:bg-slate-400"
 }
 
-function ToggleModal() {
-  const setForcast = useSetRecoilState(forcastModalAtom);
-  setForcast(true);
-}
 
 export function ForcastComponent({ variant , WeatherImage , Day}:ForcastComponentProps) {
   
   const theme = useRecoilValue(themeAtom);
+  const setForecast = useSetRecoilState(forecastAtom);
+
+  function ToggleModal() {
+    setForecast(true);
+    console.log("forcast modal called !");
+  }
 
   return <div onClick={ToggleModal} className={CustomComonentStyles[variant] + " " + "w-80 cursor-pointer flex flex-col justify-center" + " " + HoverThemes[theme]}>
     <div className="flex justify-center items-center">{WeatherImage}</div>

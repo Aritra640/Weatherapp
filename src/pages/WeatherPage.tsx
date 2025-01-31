@@ -9,6 +9,8 @@ import { ForcastTab } from "@/Components/ForcastComponents/ForcastTab";
 import { useCurWeather } from "@/hooks/useCurWeather";
 import { useWeatherImage } from "@/hooks/useWeatherImage";
 import { useAirPollution } from "@/hooks/useAirPollution";
+import { ForecastModal } from "@/Components/Modals/ForecastModal";
+import { useForecast } from "@/hooks/useForcast";
 
 const Themes = {
   Dark: "bg-slate-900  text-white",
@@ -28,6 +30,7 @@ export function Weather() {
     <div className={commonStyle}>
       <AirModal />
       <SearchModal />
+      <ForecastModal />
       <div className="flex justify-between">
         <div>
         <div className="text-5xl pl-4 pt-3">
@@ -63,6 +66,7 @@ export function Weather() {
       <br />
 
       <ForcastTab />
+
     </div>
   );
 }
