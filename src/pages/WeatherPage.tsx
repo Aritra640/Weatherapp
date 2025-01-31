@@ -10,7 +10,6 @@ import { useCurWeather } from "@/hooks/useCurWeather";
 import { useWeatherImage } from "@/hooks/useWeatherImage";
 import { useAirPollution } from "@/hooks/useAirPollution";
 import { ForecastModal } from "@/Components/Modals/ForecastModal";
-import { useForecast } from "@/hooks/useForcast";
 
 const Themes = {
   Dark: "bg-slate-900  text-white",
